@@ -175,7 +175,7 @@ let status = (item["Portal Status"] || "").toLowerCase();
 let badgeClass = status === "active" ? "active" : "inactive";
 
 // MDR %
-let mdr = Number(item["MDR Offus"]||0);
+let mdr = (Number(item["MDR Offus"]||0) * 100).toFixed(2);
 
 document.getElementById("result").innerHTML = `
 <div class="card">
