@@ -175,20 +175,17 @@ let status = (item["Portal Status"] || "").toLowerCase();
 let badgeClass = status === "active" ? "active" : "inactive";
 
 // MDR %
-let raw = item["MDR Offus"];
-
-// debug
-console.log("MDR RAW =", raw);
+let raw = item["MDR Offus"] || 0;
 
 let mdr = 0;
 
-if(raw !== undefined && raw !== null && raw !== ""){
-    let clean = raw.toString().replace("%","").replace(",",".");
-    let num = parseFloat(clean);
-
-    if(!isNaN(num)){
-        mdr = (num * 100).toFixed(2);
-    }
+if(typeof raw === "string" && raw.includes("%")){
+    // already percent format (e.g. "0.30%")
+    mdr = parseFloat(raw.replace("%","")).toFixed(2);
+} else {
+    // decimal format (e.g. 0.003)
+    let num = parseFloat(raw);
+    mdr = !isNaN(num) ? (num * 100).toFixed(2) : "0.00";
 }
 
 document.getElementById("result").innerHTML = `
