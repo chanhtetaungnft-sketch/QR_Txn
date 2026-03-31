@@ -126,13 +126,13 @@ searchBox.addEventListener("keyup", function(){
 
     let filtered = sheetData.filter(item =>
         (item["HQ ID"]+"").toLowerCase().includes(keyword) ||
-        (item["Store Name"]+"").toLowerCase().includes(keyword)
+        (item["Merchant Name"]+"").toLowerCase().includes(keyword)
     );
 
     filtered.slice(0,10).forEach(item=>{
         let div = document.createElement("div");
         div.className = "suggestion";
-        div.innerText = item["Store Name"];
+        div.innerText = item["Merchant Name"];
 
         div.onclick = ()=>{
             showResult(item);
@@ -179,7 +179,7 @@ let mdr = Number(item["MDR Offus"]||0);
 
 document.getElementById("result").innerHTML = `
 <div class="card">
-<h2>${item["Store Name"]}</h2>
+<h2>${item["Merchant Name"]}</h2>
 <p>HQ ID: ${item["HQ ID"]}</p>
 
 <p>
